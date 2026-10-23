@@ -6,6 +6,7 @@ const pool = require("./config/db");
 
 const authRoutes = require("./routes/authRoutes");
 const menuRoutes = require("./routes/menuRoutes");
+const tableRoutes = require("./routes/tableRoutes");
 
 const {
   notFound,
@@ -103,16 +104,11 @@ app.get("/api/health", async (req, res, next) => {
 |--------------------------------------------------------------------------
 */
 
-app.use(
-  "/api/auth",
-  authRoutes
-);
+app.use("/api/auth", authRoutes);
 
-app.use(
-  "/api/menu",
-  menuRoutes
-);
+app.use("/api/menu", menuRoutes);
 
+app.use("/api/tables", tableRoutes);
 /*
 |--------------------------------------------------------------------------
 | Error Handling
