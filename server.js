@@ -7,6 +7,7 @@ const pool = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const tableRoutes = require("./routes/tableRoutes");
+const reservationRoutes = require( "./routes/reservationRoutes" );
 
 const {
   notFound,
@@ -109,11 +110,28 @@ app.use("/api/auth", authRoutes);
 app.use("/api/menu", menuRoutes);
 
 app.use("/api/tables", tableRoutes);
+
+app.use("/api/reservations",reservationRoutes);
 /*
 |--------------------------------------------------------------------------
 | Error Handling
 |--------------------------------------------------------------------------
 */
+app.get("/api/db-info", async (req, res, next) => {
+  try {
+    const result = await pool.query(`
+      SELECT
+        current_database() AS database,
+        currentF_user AS user,
+        inet_server_addr() AS host,
+        inet_server_port() AS port
+    `);
+
+    res.json(result.rows[0]);
+  } catch (error) {
+    next(error);
+  }
+});
 
 app.use(notFound);
 app.use(errorHandler);
