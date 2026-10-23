@@ -6,6 +6,9 @@ const pool = require("./config/db");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 const app = express();
+const authRoutes = require(
+  "./routes/authRoutes"
+);
 
 app.use(
   cors({
@@ -49,6 +52,11 @@ app.get("/api/health", async (req, res, next) => {
     next(error);
   }
 });
+
+app.use(
+  "/api/auth",
+  authRoutes
+);
 
 app.use(notFound);
 app.use(errorHandler);
