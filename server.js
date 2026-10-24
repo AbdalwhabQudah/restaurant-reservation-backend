@@ -8,6 +8,8 @@ const authRoutes = require("./routes/authRoutes");
 const menuRoutes = require("./routes/menuRoutes");
 const tableRoutes = require("./routes/tableRoutes");
 const reservationRoutes = require( "./routes/reservationRoutes" );
+const userRoutes = require("./routes/userRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const {
   notFound,
@@ -112,6 +114,10 @@ app.use("/api/menu", menuRoutes);
 app.use("/api/tables", tableRoutes);
 
 app.use("/api/reservations",reservationRoutes);
+
+app.use("/api/users", userRoutes);
+
+app.use("/api/admin", adminRoutes);
 /*
 |--------------------------------------------------------------------------
 | Error Handling
